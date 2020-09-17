@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class IndexController {
-	////
+	////////
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Locale locale, Model model) {
 		
