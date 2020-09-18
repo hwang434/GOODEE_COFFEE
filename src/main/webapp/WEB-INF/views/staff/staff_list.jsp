@@ -59,7 +59,7 @@
             </tr>
             <c:forEach items="${staffList}" var="staffList">
 	            <tr>
-	                <td><a href="/gc/staff/staff_alterInto?wID=${staffList.w_id}">${staffList.w_id}</a></td>
+	                <td><a href="/gc/staff/staff_alterInto?w_id=${staffList.w_id}">${staffList.w_id}</a></td>
 	                <td>${staffList.w_name}</td>
 	                <td>${staffList.w_phone}</td>
 	                <td><fmt:formatDate value="${staffList.indate}" pattern="yyyy-MM-dd"/></td>

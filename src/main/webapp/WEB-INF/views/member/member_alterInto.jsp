@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,12 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>회원정보 -변경</title>
     <script src="https://kit.fontawesome.com/cccee664d4.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/member.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/prefixfree.min.js"></script>
+    <link rel="stylesheet" href="${path}/resources/css/common.css">
+    <link rel="stylesheet" href="${path}/resources/css/member.css">
+    <script type="text/javascript" src="${path}/resources/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/prefixfree.min.js"></script>
    <script>
       $(function(){$(document).attr("title","GOODEE COFFEE | "+$('#title').html());});
    </script>

@@ -48,7 +48,7 @@ public class StaffController {
 	}
 	
 	@RequestMapping(value="/staff_alterInto", method = RequestMethod.GET)
-	public String alterInto(@RequestParam int wID, @RequestParam("use") String use, Model model) {		
+	public String alterInto(@RequestParam("w_id") int wID, Model model) {		
 		
 		System.out.println("else");
 		System.out.println("wID : " + wID);

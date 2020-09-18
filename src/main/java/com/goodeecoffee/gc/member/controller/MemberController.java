@@ -22,32 +22,25 @@ public class MemberController {
 	@RequestMapping(value="alterInto", method=RequestMethod.GET)
 	public String alterInto() {
 		
-		return "alterInto";
+		return "member_alterInto";
 	}
 	
 	@RequestMapping(value="register", method=RequestMethod.GET)
 	public String register() {
 		
-		return "register";
+		return "member_register";
 	}
 	
 	@RequestMapping(value="withdraw", method=RequestMethod.GET)
 	public String withdraw() {
 		
-		return "withdraw";
+		return "member_withdraw";
 	}
-	
-	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String test(Map<String, Object> map, Model model) {
-		
-		List<Map<String, Object>> member = new ArrayList<Map<String, Object>>();
-		member = memberService.member(map);
-		model.addAttribute("test", member);
-		
-		List<Map<String, Object>> memberDESC = new ArrayList<Map<String, Object>>();
-		memberDESC = memberService.memberDESC(map);
-		model.addAttribute("testDESC", memberDESC);
-		return "test";
+
+	@RequestMapping(value="list", method=RequestMethod.GET)
+	public String list() {
+		//list
+		return "member_list";
 	}
 	
 }
