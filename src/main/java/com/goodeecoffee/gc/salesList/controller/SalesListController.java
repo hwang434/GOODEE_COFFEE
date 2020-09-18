@@ -22,6 +22,7 @@ public class SalesListController {
 	
 	@RequestMapping(value="/ss", method=RequestMethod.GET)
 	public String salesL() {
+		//
 		System.out.println("ss");
 		return "salesList";
 	}
