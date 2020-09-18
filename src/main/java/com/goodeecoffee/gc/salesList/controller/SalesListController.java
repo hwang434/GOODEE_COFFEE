@@ -10,6 +10,7 @@ import com.goodeecoffee.gc.salesList.service.SaleService;
 
 @Controller
 public class SalesListController {
+	
 	@Resource(name="saleService")
 	private SaleService saleService;
 	

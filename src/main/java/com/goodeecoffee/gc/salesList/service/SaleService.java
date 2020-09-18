@@ -9,6 +9,8 @@ import com.goodeecoffee.gc.salesList.dao.SaleDAO;
 
 @Service("saleService")
 public class SaleService implements ISaleService{
+	
 	@Resource(name="saleDAO")
 	private SaleDAO saleDAO;
+	
 }
