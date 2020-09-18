@@ -15,7 +15,7 @@ public class IndexController {
 	////////
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Locale locale, Model model) {
-		
+		//test
 		return "index._admin";
 	}
 	
