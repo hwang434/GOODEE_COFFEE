@@ -10,6 +10,7 @@ import com.goodeecoffee.gc.salesList.service.ISaleService;
 
 @Controller
 public class SalesListController {
+	
 	@Resource(name="saleService")
 	private ISaleService saleService;
 	
@@ -21,6 +22,7 @@ public class SalesListController {
 	
 	@RequestMapping(value="/ss", method=RequestMethod.GET)
 	public String salesL() {
+		//
 		System.out.println("ss");
 		return "salesList";
 	}
