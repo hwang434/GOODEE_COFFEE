@@ -12,7 +12,7 @@ public class MenuDTO {
 	public void setDiscounted_price(String discounted_price) {
 		this.discounted_price = discounted_price;
 	}
-
+	//
 	private int category_no;
 	
 	public int getMenu_id() {
