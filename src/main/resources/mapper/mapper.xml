@@ -147,7 +147,7 @@
 	
 	<insert id="menuInsert">
 		INSERT INTO menu
-		VALUES(menu_seq.NEXTVAL,#{menu_name},#{price},#{category_no})
+		VALUES(menu_seq.NEXTVAL,#{menu_name},#{price},DEFAULT,#{category_no})
 	</insert>
 	
 	<delete id="menuDelete" parameterType="list">

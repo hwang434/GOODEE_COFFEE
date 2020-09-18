@@ -5,7 +5,14 @@ public class MenuDTO {
 	private int menu_id;
 	private String menu_name;
 	private int price;
-	private String description;
+	private String discounted_price;
+	public String getDiscounted_price() {
+		return discounted_price;
+	}
+	public void setDiscounted_price(String discounted_price) {
+		this.discounted_price = discounted_price;
+	}
+
 	private int category_no;
 	
 	public int getMenu_id() {
@@ -26,12 +33,6 @@ public class MenuDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String descrption) {
-		this.description = descrption;
-	}
 	public int getCategory_no() {
 		return category_no;
 	}
@@ -39,9 +40,4 @@ public class MenuDTO {
 		this.category_no = category_no;
 	}
 	
-	@Override
-	public String toString() {
-		return "MenuDTO [menu_id=" + menu_id + ", menu_name=" + menu_name + ", price=" + price + ", description="
-				+ description + ", category_no=" + category_no + "]";
-	}
 }
