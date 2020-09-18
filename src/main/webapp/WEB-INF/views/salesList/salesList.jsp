@@ -49,46 +49,44 @@
 	<!--본문-->
     <main>
         <section id="search_condition">
-            <div class="title">조회조건</div>
-            <div class="option_zone_left">
-                <button type="button">오늘</button>
-                <button type="button">7일</button>
-                <button type="button">15일</button>
-                <button type="button">1개월</button>
-                <button type="button">3개월</button>
-                <button type="button">6개월</button>
-                <select name="months">
-                    <option value="">월별선택</option>
-                </select>
-                <div class="calander">
-                    <form>
-                        <p><input type="date" class="currentDate" value=""/></p>
-                    </form>
-                    <span>~</span>
-                    <form>
-                        <p><input type="date" class="currentDate"value=""
-                        /></p>
-                    </form>
-                </div>
-                <script>
-                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
-                </script>
-            </div>
-            <div class="option_zone_right">
-                <p>결제상태:</p>
-                <select name="pay">
-                    <option value="">전체</option>
-                    <option value="정상결제">정상결제</option>
-                    <option value="결제취소">결제취소</option>
-                </select>
-                <p>결제방법:</p>
-                <select name="pa2">
-                    <option value="">전체</option>
-                    <option value="카드">카드</option>
-                    <option value="현금">현금</option>
-                </select>
-            </div>
-            <button type="button" class="click">조회</button>
+        	<form method="POST" action="/gc/">
+	            <div class="title">조회조건</div>
+	            <div class="option_zone_left">
+	                <button type="button">오늘</button>
+	                <button type="button">7일</button>
+	                <button type="button">15일</button>
+	                <button type="button">1개월</button>
+	                <button type="button">3개월</button>
+	                <button type="button">6개월</button>
+	                <select name="months">
+	                    <option value="">월별선택</option>
+	                </select>
+	                <div class="calander">
+	                    <p><input type="date" class="currentDate" value=""/></p>
+	                    <span>~</span>
+	                    <p><input type="date" class="currentDate"value=""
+	                    /></p>
+	                </div>
+	                <script>
+	                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
+	                </script>
+	            </div>
+	            <div class="option_zone_right">
+	                <p>결제상태:</p>
+	                <select name="pay">
+	                    <option value="">전체</option>
+	                    <option value="정상결제">정상결제</option>
+	                    <option value="결제취소">결제취소</option>
+	                </select>
+	                <p>결제방법:</p>
+	                <select name="pa2">
+	                    <option value="">전체</option>
+	                    <option value="카드">카드</option>
+	                    <option value="현금">현금</option>
+	                </select>
+	            </div>
+	            <button type="button" class="click">조회</button>
+            </form>
         </section>
         <section id="search_list">
             <table>
