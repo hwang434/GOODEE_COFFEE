@@ -50,10 +50,10 @@
 	<!-- 메인페이지 시작 -->
     <main id="main_index">
         <section class="main_left_section">
-        	<a href="#"><div class="main_menu">매출조회</div></a>
-        	<a href="#"><div class="main_menu">메뉴관리</div></a>
-        	<a href="#"><div class="main_menu">직원추가</div></a>
-        	<a href="#"><div class="main_menu">직원삭제</div></a>
+        	<a href="/gc/salesList"><div class="main_menu">매출조회</div></a>
+        	<a href="/gc/menu/menuBoard"><div class="main_menu">메뉴관리</div></a>
+        	<a href="/gc/staff/staff_list"><div class="main_menu">직원관리</div></a>
+        	<div></div>
             <div></div>
             <div></div>
             <div></div>
