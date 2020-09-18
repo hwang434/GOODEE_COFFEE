@@ -4,11 +4,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.goodeecoffee.gc.menu.dao.IMenuDAO;
-import com.goodeecoffee.gc.salesList.dao.SaleDAO;
+import com.goodeecoffee.gc.salesList.dao.ISaleDAO;
 
 @Service("saleService")
 public class SaleService implements ISaleService{
+	
 	@Resource(name="saleDAO")
-	private SaleDAO saleDAO;
+	private ISaleDAO saleDAO;
 }
