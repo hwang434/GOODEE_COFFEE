@@ -39,7 +39,7 @@ public class MemberController {
 
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String list() {
-		//list22
+		//list222
 		return "member_list";
 	}
 	
