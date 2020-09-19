@@ -54,13 +54,13 @@
 			
 			
 			function changeDate(){
-				var val= this.getAttribute("value");			//누른 기간 일 수.
+				var val= this.getAttribute("value");										//누른 기간 일 수.
 				var dateObject = new Date();
-				var startDate;									//시작 날짜
-				var endDate;									//끝나는 날짜
+				var startDate;																//시작 날짜
+				var endDate;																//끝나는 날짜
 				var year = dateObject.getFullYear();										//연도
 				var month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
-				var date = dateObject.getDate();										//일
+				var date = dateObject.getDate();											//일
 				var dateArr = new Array();
 				
 				dateArr = changeDateLength(month,date).split("/");
@@ -72,30 +72,20 @@
 				if(val<30){
 					dateObject.setDate(date-val);
 					month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
-					date = dateObject.getDate();										//일
+					date = dateObject.getDate()+1;										//일
 					dateArr = changeDateLength(month,date).split("/");
-					month = dateArr[0];										//연도
-					date = dateArr[1];										//실제 달(+1 처리된 거)
-					startDate = year+"-"+month+"-"+date;
 				}else{
 					val = val/30;
 					month = dateObject.getMonth()+1-val;
 					date = dateObject.getDate();										//일
 					dateArr = changeDateLength(month,date).split("/");
-					month = dateArr[0];										//연도
-					date = dateArr[1];										//실제 달(+1 처리된 거)
-					startDate = year+"-"+month+"-"+date;
-				}		
+				}	
+				month = dateArr[0];										//연도
+				date = dateArr[1];										//실제 달(+1 처리된 거)
+				startDate = year+"-"+month+"-"+date;					//
 				
 				document.getElementById("startDate").setAttribute("value",startDate);
 				document.getElementById("endDate").setAttribute("value",endDate);
-				//console.log("changeDate() called");
-				//console.log("startdate : "+startDate);
-				//console.log("endDate : "+endDate);
-				//console.log("val의 타입 : "+typeof(val));
-				
-				
-				
 			}
 			function changeDateLength(month,date){
 				console.log("============changeDateLength("+month+","+date+")===========");
@@ -130,10 +120,9 @@
 	                    <option value="">월별선택</option>
 	                </select>
 	                <div class="calander">
-	                    <p><input type="date" id="startDate" class="currentDate" value="2020-04-01"/></p>
+	                    <p><input type="date" id="startDate" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
 	                    <span>~</span>
-	                    <p><input type="date" id="endDate" class="currentDate"value="2020-04-01"
-	                    /></p>
+	                    <p><input type="date" id="endDate" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
 	                </div>
 	                <script>
 	                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
