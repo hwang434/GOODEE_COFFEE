@@ -18,7 +18,9 @@
     <script type="text/javascript" src="${path}/resources/js/prefixfree.min.js"></script>
 	<script>
 		$(function(){$(document).attr("title","GOODEE COFFEE | "+$('#title').html());});
+		
 	</script>
+	
 </head>
 <body>
     <!-- 헤더 -->
@@ -41,9 +43,23 @@
 				var d = new Date();
 				var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
 				var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-				
 				$("#login_date").find("span").html(currentDate+currentTime);
 			}
+			window.onload = function(){
+				var dateBtns = document.getElementsByClassName("dateBtn");
+				console.log(dateBtns);
+				for(var dateBtn of dateBtns){
+					dateBtn.addEventListener("click", changeDate);
+				}
+			}
+			
+			
+			function changeDate(){
+				console.log("changeDate() called");
+				var val = this.getAttribute("value");
+				console.log(val);
+			}
+			
 			
 	</script>
 	<!--본문-->
@@ -52,12 +68,12 @@
         	<form method="POST" action="/gc/">
 	            <div class="title">조회조건</div>
 	            <div class="option_zone_left">
-	                <button type="button">오늘</button>
-	                <button type="button">7일</button>
-	                <button type="button">15일</button>
-	                <button type="button">1개월</button>
-	                <button type="button">3개월</button>
-	                <button type="button">6개월</button>
+	                <button type="button" id="todayBtn" class="dateBtn" value="1">오늘</button>
+	                <button type="button" id="sevenBtn"  class="dateBtn" value="7">7일</button>
+	                <button type="button" id="fifteenBtn"  class="dateBtn" value="15">15일</button>
+	                <button type="button" id="monthBtn" class="dateBtn" value="1">1개월</button>
+	                <button type="button" id="threeMonthBtn" class="dateBtn" value="3">3개월</button>
+	                <button type="button" id="sixMonthBtn" class="dateBtn" value="6">6개월</button>
 	                <select name="months">
 	                    <option value="">월별선택</option>
 	                </select>
