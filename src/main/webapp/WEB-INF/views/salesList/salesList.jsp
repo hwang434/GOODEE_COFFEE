@@ -102,7 +102,7 @@
 	<!--본문-->
     <main>
         <section id="search_condition">
-        	<form method="POST" action="/gc/">
+        	<form method="GET" action="${path}/selectSaleList">
 	            <div class="title">조회조건</div>
 	            <div class="option_zone_left">
 	                <button type="button" id="todayBtn" class="dateBtn" value="1">오늘</button>
@@ -112,7 +112,19 @@
 	                <button type="button" id="threeMonthBtn" class="dateBtn" value="90">3개월</button>
 	                <button type="button" id="sixMonthBtn" class="dateBtn" value="180">6개월</button>
 	                <select name="months">
-	                    <option value="">월별선택</option>
+	                    <option selected>월별선택</option>
+	                    <option value="01">01</option>
+	                    <option value="02">02</option>
+	                    <option value="03">03</option>
+	                    <option value="04">04</option>
+	                    <option value="05">05</option>
+	                    <option value="06">06</option>
+	                    <option value="07">07</option>
+	                    <option value="08">08</option>
+	                    <option value="09">09</option>
+	                    <option value="10">10</option>
+	                    <option value="11">11</option>
+	                    <option value="12">12</option>
 	                </select>
 	                <div class="calander">
 	                    <p><input type="date" id="startDate" name="startDate" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
@@ -125,7 +137,7 @@
 	            </div>
 	            <div class="option_zone_right">
 	                <p>결제상태:</p>
-	                <select name="pay">
+	                <select name="paymentStatus">
 	                    <option value="">전체</option>
 	                    <option value="정상결제">정상결제</option>
 	                    <option value="결제취소">결제취소</option>
@@ -137,7 +149,7 @@
 	                    <option value="현금">현금</option>
 	                </select>
 	            </div>
-	            <button type="button" class="click">조회</button>
+	            <button type="submit" class="click">조회</button>
             </form>
         </section>
         <section id="search_list">
