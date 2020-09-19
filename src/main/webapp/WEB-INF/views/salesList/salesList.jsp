@@ -18,7 +18,9 @@
     <script type="text/javascript" src="${path}/resources/js/prefixfree.min.js"></script>
 	<script>
 		$(function(){$(document).attr("title","GOODEE COFFEE | "+$('#title').html());});
+		
 	</script>
+	
 </head>
 <body>
     <!-- 헤더 -->
@@ -34,38 +36,131 @@
 	<script type="text/javascript">
 			$(document).ready(function() {
 				printTime();
-				setInterval(printTime, 1000);	
+				setInterval(printTime, 1000);
+				
+				
+				
+				
+				var selectBtn = document.getElementsByName("selectBtn")[0];
+				selectBtn.onclick = function(){
+					var open_time = document.getElementsByName("open_time")[0];
+					var close_time = document.getElementsByName("close_time")[0];
+					var selectFrm = document.getElementsByName("selectFrm")[0];
+					var payment_status = document.getElementsByName("payment_status")[0];
+					var payment_method = document.getElementsByName("payment_method")[0];
+					console.log(payment_status);
+					console.log(payment_method);
+					console.log(open_time.options[open_time.selectedIndex].value);
+					console.log("close_time : "+close_time.value);
+					// open_time selected 값 가져오기 수정해야함
+					if(open_time){
+						alert("날짜를 선택해주세요.");
+						return;
+					}
+					if(payment_status.value=="전체" || payment_method.value==	"전체"){
+						alert("결제 상태 또는 결제 수단을 선택해주세요.");
+						return
+					}else{
+						//selectFrm.submit();
+					}
+				}
+				
 			});
 			// TODO 보여주는 시간을 서버 시간으로 고칠 것(처음에 한번만 서버 시간을 가져와서 셋팅)
 			function printTime() {
 				var d = new Date();
 				var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
 				var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-				
 				$("#login_date").find("span").html(currentDate+currentTime);
 			}
+			window.onload = function(){
+				var dateBtns = document.getElementsByClassName("dateBtn");
+				for(var dateBtn of dateBtns){
+					dateBtn.addEventListener("click", changeDate);
+				}
+			}
+			
+			
+			function changeDate(){
+				var val= this.getAttribute("value");										//누른 기간 일 수.
+				var dateObject = new Date();
+				var startDate;																//시작 날짜
+				var endDate;																//끝나는 날짜
+				var year = dateObject.getFullYear();										//연도
+				var month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
+				var date = dateObject.getDate();											//일
+				var dateArr = new Array();
+				
+				//endDate 설정.
+				dateArr = changeDateLength(month,date).split("/");
+				month = dateArr[0];
+				date = dateArr[1];
+				endDate = year+"-"+month+"-"+date;
+				//startDate 설정.				
+				if(val<30){
+					dateObject.setDate(date-val);
+					month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
+					date = dateObject.getDate()+1;										//일
+				}else{
+					val = val/30;
+					month = dateObject.getMonth()+1-val;
+					date = dateObject.getDate();										//일
+				}
+				
+				dateArr = changeDateLength(month,date).split("/");
+				month = dateArr[0];										//연도
+				date = dateArr[1];										//실제 달(+1 처리된 거)
+				startDate = year+"-"+month+"-"+date;					
+				
+				document.getElementById("startDate").value = startDate;
+				document.getElementById("endDate").value = endDate;
+			}
+			
+			//달과 일 수 길이가 1자리일 경우 앞에 0을 붙여주는 메서드
+			function changeDateLength(month,date){
+				if(month.toString().length<=1){
+					month = "0"+(month);
+				}
+				if(date.toString().length<=1){
+					date = "0"+(date);
+				}
+				return month+"/"+date;
+			}
+			
+			
 			
 	</script>
 	<!--본문-->
     <main>
         <section id="search_condition">
-        	<form method="POST" action="/gc/">
+        	<form method="GET" action="${path}/selectSaleList" name="selectFrm">
 	            <div class="title">조회조건</div>
 	            <div class="option_zone_left">
-	                <button type="button">오늘</button>
-	                <button type="button">7일</button>
-	                <button type="button">15일</button>
-	                <button type="button">1개월</button>
-	                <button type="button">3개월</button>
-	                <button type="button">6개월</button>
+	                <button type="button" id="todayBtn" class="dateBtn" value="1">오늘</button>
+	                <button type="button" id="sevenBtn"  class="dateBtn" value="7">7일</button>
+	                <button type="button" id="fifteenBtn"  class="dateBtn" value="15">15일</button>
+	                <button type="button" id="monthBtn" class="dateBtn" value="30">1개월</button>
+	                <button type="button" id="threeMonthBtn" class="dateBtn" value="90">3개월</button>
+	                <button type="button" id="sixMonthBtn" class="dateBtn" value="180">6개월</button>
 	                <select name="months">
-	                    <option value="">월별선택</option>
+	                    <option selected>월별선택</option>
+	                    <option value="01">01</option>
+	                    <option value="02">02</option>
+	                    <option value="03">03</option>
+	                    <option value="04">04</option>
+	                    <option value="05">05</option>
+	                    <option value="06">06</option>
+	                    <option value="07">07</option>
+	                    <option value="08">08</option>
+	                    <option value="09">09</option>
+	                    <option value="10">10</option>
+	                    <option value="11">11</option>
+	                    <option value="12">12</option>
 	                </select>
 	                <div class="calander">
-	                    <p><input type="date" class="currentDate" value=""/></p>
+	                    <p><input type="date" id="startDate" name="open_time" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
 	                    <span>~</span>
-	                    <p><input type="date" class="currentDate"value=""
-	                    /></p>
+	                    <p><input type="date" id="endDate" name="close_time" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
 	                </div>
 	                <script>
 	                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
@@ -73,19 +168,19 @@
 	            </div>
 	            <div class="option_zone_right">
 	                <p>결제상태:</p>
-	                <select name="pay">
+	                <select name="payment_status">
 	                    <option value="">전체</option>
 	                    <option value="정상결제">정상결제</option>
 	                    <option value="결제취소">결제취소</option>
 	                </select>
 	                <p>결제방법:</p>
-	                <select name="pa2">
+	                <select name="payment_method">
 	                    <option value="">전체</option>
 	                    <option value="카드">카드</option>
 	                    <option value="현금">현금</option>
 	                </select>
 	            </div>
-	            <button type="button" class="click">조회</button>
+	            <button type="button" name="selectBtn" class="click">조회</button>
             </form>
         </section>
         <section id="search_list">
