@@ -36,7 +36,35 @@
 	<script type="text/javascript">
 			$(document).ready(function() {
 				printTime();
-				setInterval(printTime, 1000);	
+				setInterval(printTime, 1000);
+				
+				
+				
+				
+				var selectBtn = document.getElementsByName("selectBtn")[0];
+				selectBtn.onclick = function(){
+					var open_time = document.getElementsByName("open_time")[0];
+					var close_time = document.getElementsByName("close_time")[0];
+					var selectFrm = document.getElementsByName("selectFrm")[0];
+					var payment_status = document.getElementsByName("payment_status")[0];
+					var payment_method = document.getElementsByName("payment_method")[0];
+					console.log(payment_status);
+					console.log(payment_method);
+					console.log(open_time.options[open_time.selectedIndex].value);
+					console.log("close_time : "+close_time.value);
+					// open_time selected 값 가져오기 수정해야함
+					if(open_time){
+						alert("날짜를 선택해주세요.");
+						return;
+					}
+					if(payment_status.value=="전체" || payment_method.value==	"전체"){
+						alert("결제 상태 또는 결제 수단을 선택해주세요.");
+						return
+					}else{
+						//selectFrm.submit();
+					}
+				}
+				
 			});
 			// TODO 보여주는 시간을 서버 시간으로 고칠 것(처음에 한번만 서버 시간을 가져와서 셋팅)
 			function printTime() {
@@ -98,11 +126,14 @@
 				}
 				return month+"/"+date;
 			}
+			
+			
+			
 	</script>
 	<!--본문-->
     <main>
         <section id="search_condition">
-        	<form method="GET" action="${path}/selectSaleList">
+        	<form method="GET" action="${path}/selectSaleList" name="selectFrm">
 	            <div class="title">조회조건</div>
 	            <div class="option_zone_left">
 	                <button type="button" id="todayBtn" class="dateBtn" value="1">오늘</button>
@@ -127,9 +158,9 @@
 	                    <option value="12">12</option>
 	                </select>
 	                <div class="calander">
-	                    <p><input type="date" id="startDate" name="startDate" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
+	                    <p><input type="date" id="startDate" name="open_time" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
 	                    <span>~</span>
-	                    <p><input type="date" id="endDate" name="endDate" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
+	                    <p><input type="date" id="endDate" name="close_time" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
 	                </div>
 	                <script>
 	                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
@@ -137,19 +168,19 @@
 	            </div>
 	            <div class="option_zone_right">
 	                <p>결제상태:</p>
-	                <select name="paymentStatus">
+	                <select name="payment_status">
 	                    <option value="">전체</option>
 	                    <option value="정상결제">정상결제</option>
 	                    <option value="결제취소">결제취소</option>
 	                </select>
 	                <p>결제방법:</p>
-	                <select name="pa2">
+	                <select name="payment_method">
 	                    <option value="">전체</option>
 	                    <option value="카드">카드</option>
 	                    <option value="현금">현금</option>
 	                </select>
 	            </div>
-	            <button type="submit" class="click">조회</button>
+	            <button type="button" name="selectBtn" class="click">조회</button>
             </form>
         </section>
         <section id="search_list">
