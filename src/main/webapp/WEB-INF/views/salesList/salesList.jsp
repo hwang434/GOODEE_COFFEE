@@ -63,42 +63,37 @@
 				var date = dateObject.getDate();											//일
 				var dateArr = new Array();
 				
+				//endDate 설정.
 				dateArr = changeDateLength(month,date).split("/");
 				month = dateArr[0];
 				date = dateArr[1];
 				endDate = year+"-"+month+"-"+date;
-				console.log(endDate);
-				
+				//startDate 설정.				
 				if(val<30){
 					dateObject.setDate(date-val);
 					month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
 					date = dateObject.getDate()+1;										//일
-					
 				}else{
 					val = val/30;
 					month = dateObject.getMonth()+1-val;
 					date = dateObject.getDate();										//일
-				}	
+				}
+				
 				dateArr = changeDateLength(month,date).split("/");
 				month = dateArr[0];										//연도
 				date = dateArr[1];										//실제 달(+1 처리된 거)
 				startDate = year+"-"+month+"-"+date;					
 				
-				//document.getElementById("startDate").setAttribute("value",startDate);
-				//document.getElementById("endDate").setAttribute("value",endDate);
-				
 				document.getElementById("startDate").value = startDate;
 				document.getElementById("endDate").value = endDate;
 			}
+			
+			//달과 일 수 길이가 1자리일 경우 앞에 0을 붙여주는 메서드
 			function changeDateLength(month,date){
-				console.log("============changeDateLength("+month+","+date+")===========");
 				if(month.toString().length<=1){
-					console.log("if문 month 실행");
 					month = "0"+(month);
-					console.log("수정된 월 : "+month);
 				}
 				if(date.toString().length<=1){
-					console.log("if문 date 실행");
 					date = "0"+(date);
 				}
 				return month+"/"+date;
