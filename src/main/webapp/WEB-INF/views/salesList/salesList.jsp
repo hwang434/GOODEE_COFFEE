@@ -47,7 +47,6 @@
 			}
 			window.onload = function(){
 				var dateBtns = document.getElementsByClassName("dateBtn");
-				console.log(dateBtns);
 				for(var dateBtn of dateBtns){
 					dateBtn.addEventListener("click", changeDate);
 				}
@@ -55,10 +54,63 @@
 			
 			
 			function changeDate(){
-				console.log("changeDate() called");
-				var val = this.getAttribute("value");
-				console.log(val);
+				var val= this.getAttribute("value");			//누른 기간 일 수.
+				var dateObject = new Date();
+				var startDate;									//시작 날짜
+				var endDate;									//끝나는 날짜
+				var year = dateObject.getFullYear();										//연도
+				var month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
+				var date = dateObject.getDate();										//일
+				var dateArr = new Array();
+				
+				dateArr = changeDateLength(month,date).split("/");
+				month = dateArr[0];
+				date = dateArr[1];
+				endDate = year+"-"+month+"-"+date;
+				console.log(endDate);
+				
+				if(val<30){
+					dateObject.setDate(date-val);
+					month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
+					date = dateObject.getDate();										//일
+					dateArr = changeDateLength(month,date).split("/");
+					month = dateArr[0];										//연도
+					date = dateArr[1];										//실제 달(+1 처리된 거)
+					startDate = year+"-"+month+"-"+date;
+				}else{
+					val = val/30;
+					month = dateObject.getMonth()+1-val;
+					date = dateObject.getDate();										//일
+					dateArr = changeDateLength(month,date).split("/");
+					month = dateArr[0];										//연도
+					date = dateArr[1];										//실제 달(+1 처리된 거)
+					startDate = year+"-"+month+"-"+date;
+				}		
+				
+				document.getElementById("startDate").setAttribute("value",startDate);
+				document.getElementById("endDate").setAttribute("value",endDate);
+				//console.log("changeDate() called");
+				//console.log("startdate : "+startDate);
+				//console.log("endDate : "+endDate);
+				//console.log("val의 타입 : "+typeof(val));
+				
+				
+				
 			}
+			function changeDateLength(month,date){
+				console.log("============changeDateLength("+month+","+date+")===========");
+				if(month.toString().length<=1){
+					console.log("if문 month 실행");
+					month = "0"+(month);
+					console.log("수정된 월 : "+month);
+				}
+				if(date.toString().length<=1){
+					console.log("if문 date 실행");
+					date = "0"+(date);
+				}
+				return month+"/"+date;
+			}
+			
 			
 			
 	</script>
@@ -71,16 +123,16 @@
 	                <button type="button" id="todayBtn" class="dateBtn" value="1">오늘</button>
 	                <button type="button" id="sevenBtn"  class="dateBtn" value="7">7일</button>
 	                <button type="button" id="fifteenBtn"  class="dateBtn" value="15">15일</button>
-	                <button type="button" id="monthBtn" class="dateBtn" value="1">1개월</button>
-	                <button type="button" id="threeMonthBtn" class="dateBtn" value="3">3개월</button>
-	                <button type="button" id="sixMonthBtn" class="dateBtn" value="6">6개월</button>
+	                <button type="button" id="monthBtn" class="dateBtn" value="30">1개월</button>
+	                <button type="button" id="threeMonthBtn" class="dateBtn" value="90">3개월</button>
+	                <button type="button" id="sixMonthBtn" class="dateBtn" value="180">6개월</button>
 	                <select name="months">
 	                    <option value="">월별선택</option>
 	                </select>
 	                <div class="calander">
-	                    <p><input type="date" class="currentDate" value=""/></p>
+	                    <p><input type="date" id="startDate" class="currentDate" value="2020-04-01"/></p>
 	                    <span>~</span>
-	                    <p><input type="date" class="currentDate"value=""
+	                    <p><input type="date" id="endDate" class="currentDate"value="2020-04-01"
 	                    /></p>
 	                </div>
 	                <script>
