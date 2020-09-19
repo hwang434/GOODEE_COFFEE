@@ -73,19 +73,22 @@
 					dateObject.setDate(date-val);
 					month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
 					date = dateObject.getDate()+1;										//일
-					dateArr = changeDateLength(month,date).split("/");
+					
 				}else{
 					val = val/30;
 					month = dateObject.getMonth()+1-val;
 					date = dateObject.getDate();										//일
-					dateArr = changeDateLength(month,date).split("/");
 				}	
+				dateArr = changeDateLength(month,date).split("/");
 				month = dateArr[0];										//연도
 				date = dateArr[1];										//실제 달(+1 처리된 거)
-				startDate = year+"-"+month+"-"+date;					//
+				startDate = year+"-"+month+"-"+date;					
 				
-				document.getElementById("startDate").setAttribute("value",startDate);
-				document.getElementById("endDate").setAttribute("value",endDate);
+				//document.getElementById("startDate").setAttribute("value",startDate);
+				//document.getElementById("endDate").setAttribute("value",endDate);
+				
+				document.getElementById("startDate").value = startDate;
+				document.getElementById("endDate").value = endDate;
 			}
 			function changeDateLength(month,date){
 				console.log("============changeDateLength("+month+","+date+")===========");
@@ -100,9 +103,6 @@
 				}
 				return month+"/"+date;
 			}
-			
-			
-			
 	</script>
 	<!--본문-->
     <main>
@@ -120,9 +120,9 @@
 	                    <option value="">월별선택</option>
 	                </select>
 	                <div class="calander">
-	                    <p><input type="date" id="startDate" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
+	                    <p><input type="date" id="startDate" name="startDate" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
 	                    <span>~</span>
-	                    <p><input type="date" id="endDate" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
+	                    <p><input type="date" id="endDate" name="endDate" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
 	                </div>
 	                <script>
 	                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
