@@ -17,71 +17,10 @@
     <script type="text/javascript" src="${path}/resources/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="${path}/resources/js/prefixfree.min.js"></script>
-   <script>
-      $(function(){$(document).attr("title","GOODEE COFFEE | "+$('#title').html());});
-      
-      //메뉴 추가 내용 비었을 시 submit 방지
-      function menuCheck(){
-         var menuName = $("#menuName").val();
-         var menuNameLength = $("#menuName").val().length;
-         var menuPrice = $("#menuPrice").val().length;
-         var menuInsertFrm = $("#menuInsertFrm");
-         if(menuNameLength>25 || menuNameLength==0 || menuPrice > 5 || menuPrice==0){      //1<=메뉴길이<=24, 0<메뉴가격<=5
-            window.alert("메뉴 이름 또는 가격 양식이 틀립니다.");
-         }else{
-            $.ajax({
-                  type: "POST",
-                  async: "false",
-                  url: "/gc/menu/menuCheck",
-                  data: {menuName:menuName},
-                  success:function(isMenuExist,textStatus){
-                     console.log(isMenuExist);
-                     if(isMenuExist=="isDuplicated"){
-                        alert("이미 존재하는 메뉴 이름입니다.");
-                     }else{
-                        menuInsertFrm.submit();
-                     }
-                  }
-              });   
-         }
-      }
-      
-      function categoryCheck(){
-         var categoryName = $("#categoryInsertText").val();
-         var isDuplicated;
-         $.ajax({
-               type: "POST",
-               async: false,
-               url: "/gc/menu/categoryCheck",
-               data: {categoryName:categoryName},
-               success:function(data,textStatus){
-                  isDuplicated = data;
-                  console.log("ajax data : "+data);
-                  console.log("isDuplicated : "+isDuplicated);
-               }
-           });
-         return isDuplicated;
-      }
-      
-      function categoryInsert(){
-         var categoryName = $("#categoryInsertText").val();
-         if(categoryName==null || categoryName=="" || categoryName.length>25){
-            window.alert("카테고리 제목은 1~25자 이내로 작성해주세요.");
-            return false;
-         }
-         var isDuplicated = categoryCheck();
-         if(isDuplicated=="false"){
-            document.categoryInsertFrm.submit();   
-            window.alert("카테고리가 추가되었습니다.");
-         }else if(isDuplicated=="isDuplicated"){
-            window.alert("이미 존재하는 카테고리 명입니다.");
-            return false;
-         }
-      }
-   </script>
+    <script type="text/javascript" src="${path}/resources/js/common/common.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/menu/menuBoard.js"></script>
 </head>
 <body>
-   
    <!-- 헤더 -->
    <header>
       <div id="header_wrapper">
@@ -98,19 +37,6 @@
       </div>
    </header>
    <%@ include file="../gnb_admin.jsp"%>
-   <script type="text/javascript">
-         $(document).ready(function() {
-            printTime();
-            setInterval(printTime, 1000);   
-         });
-         // TODO 보여주는 시간을 서버 시간으로 고칠 것(처음에 한번만 서버 시간을 가져와서 셋팅)
-         function printTime() {
-            var d = new Date();
-            var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
-            var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-            $("#login_date").find("span").html(currentDate+currentTime);
-         }
-   </script>
    <!-- 메인 -->
    <main> 
    <!-- 카테고리 관리 -->
@@ -136,22 +62,6 @@
                 </form>
             </div>
       </section>
-   <script>
-   <!--탭메뉴 제이쿼리-->
-      $(document).ready(function() {
-         $("#content div").hide();
-         $("#tabs li:first").attr("id", "current");
-         $("#content div:first").fadeIn();
-
-         $('#tabs a').click(function(e) {
-            e.preventDefault();
-            $("#content div").hide();
-            $("#tabs li").attr("id", "");
-            $(this).parent().attr("id", "current");
-            $('#' + $(this).attr('title')).fadeIn();
-         });
-      });
-   </script> <!-- 메뉴설정 -->
    <script>
    <!--체크박스 생성 제이쿼리 -->
       $(document).ready(function() {
