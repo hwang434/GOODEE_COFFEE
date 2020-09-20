@@ -28,7 +28,6 @@ public class MenuController {
 
 	@RequestMapping(value = "/menuBoard", method = RequestMethod.GET)
 	public String menu(Map<String, Object> map, Model model) {
-
 		List<Map<String, Object>> categoryList = new ArrayList<Map<String, Object>>();
 		categoryList = menuService.categoryLists(map);
 		model.addAttribute("category", categoryList);
@@ -36,23 +35,18 @@ public class MenuController {
 		List<Map<String, Object>> menuList = new ArrayList<Map<String, Object>>();
 		menuList = menuService.menuList(map);
 		model.addAttribute("menuList", menuList);
-
 		return "menuBoard";
 	}
 
 	@RequestMapping(value = "/categoryInsert", method = RequestMethod.POST)
 	public String categoryInsert(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 요청을 utf-8로 설정해주는 것, filter로 바꿔야함.
 		String categoryName = request.getParameter("category_name");
-		System.out.println("categoryName : "+categoryName);
     	menuService.categoryInsert(categoryName);
-
 		return "redirect:/menu/menuBoard";
 	}
 
 	@RequestMapping(value = "/categoryDelete", method = RequestMethod.GET)
 	public String categoryDelete(HttpServletRequest request) {
-		// 요청을 utf-8로 설정해주는 것, filter로 바꿔야함.
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -70,51 +64,29 @@ public class MenuController {
 
 	
 	 @RequestMapping(value="/menuInsert", method=RequestMethod.GET)
-	 public String menuInsert(HttpServletRequest request) { //요청을 utf-8로 설정해주는 것, filter로 바꿔야함.
-		 try {
-			 request.setCharacterEncoding("UTF-8");
-		 } catch (UnsupportedEncodingException e) { // TODO Auto-generated catch block
-			 e.printStackTrace();
-		 }
+	 public String menuInsert(HttpServletRequest request) {
 		 MenuDTO menu = new MenuDTO();
-		 
 		 int categoryNo = Integer.parseInt(request.getParameter("category_no"));
 		 String menuName = request.getParameter("menu_name");
 		 int price = Integer.parseInt(request.getParameter("price"));
 		 menu.setCategory_no(categoryNo);
 		 menu.setMenu_name(menuName);
 		 menu.setPrice(price);
-		 //menu.setDescription(null);
-		 
-		 System.out.println(categoryNo);
-		 System.out.println(menuName);
-		 System.out.println(price);
-		 //System.out.println("categoryInsert()");
+//		 System.out.println(categoryNo);
+//		 System.out.println(menuName);
+//		 System.out.println(price);		 
 		 menuService.menuInsert(menu);
-		 
-		 
 		 return "redirect:/menu/menuBoard";
 	 }
 	 
 	 @RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
 	 public String menuDelete(Map<String, Object> map, HttpServletRequest request) {
-			// 요청을 utf-8로 설정해주는 것, filter로 바꿔야함.
-			try {
-				request.setCharacterEncoding("UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			String[] menuStringList = request.getParameterValues("menuID");
 			List<String> menuList = new ArrayList<String>(menuStringList.length);
 			for(String menu : menuStringList) {
 				menuList.add(menu);
-				System.out.println("==========메뉴 번호=============");
-				System.out.println(menu);
 			}
 			menuService.menuDelete(menuList);
-
-
 			return "redirect:/menu/menuBoard";
 	 }
 	 

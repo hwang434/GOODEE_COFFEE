@@ -16,11 +16,8 @@
     <script type="text/javascript" src="${path}/resources/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="${path}/resources/js/prefixfree.min.js"></script>
-	<script>
-		$(function(){$(document).attr("title","GOODEE COFFEE | "+$('#title').html());});
-		
-	</script>
-	
+	<script type="text/javascript" src="${path}/resources/js/common/common.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/salesList/salesList.js"></script>	
 </head>
 <body>
     <!-- 헤더 -->
@@ -33,103 +30,6 @@
         </div>
     </header>
 	<%@ include file="../gnb_admin.jsp"%>
-	<script type="text/javascript">
-			$(document).ready(function() {
-				printTime();
-				setInterval(printTime, 1000);
-				
-				
-				
-				
-				var selectBtn = document.getElementsByName("selectBtn")[0];
-				selectBtn.onclick = function(){
-					var open_time = document.getElementsByName("open_time")[0];
-					var close_time = document.getElementsByName("close_time")[0];
-					var selectFrm = document.getElementsByName("selectFrm")[0];
-					var payment_status = document.getElementsByName("payment_status")[0];
-					var payment_method = document.getElementsByName("payment_method")[0];
-					console.log(payment_status);
-					console.log(payment_method);
-					console.log(open_time.options[open_time.selectedIndex].value);
-					console.log("close_time : "+close_time.value);
-					// open_time selected 값 가져오기 수정해야함
-					if(open_time){
-						alert("날짜를 선택해주세요.");
-						return;
-					}
-					if(payment_status.value=="전체" || payment_method.value==	"전체"){
-						alert("결제 상태 또는 결제 수단을 선택해주세요.");
-						return
-					}else{
-						//selectFrm.submit();
-					}
-				}
-				
-			});
-			// TODO 보여주는 시간을 서버 시간으로 고칠 것(처음에 한번만 서버 시간을 가져와서 셋팅)
-			function printTime() {
-				var d = new Date();
-				var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
-				var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-				$("#login_date").find("span").html(currentDate+currentTime);
-			}
-			window.onload = function(){
-				var dateBtns = document.getElementsByClassName("dateBtn");
-				for(var dateBtn of dateBtns){
-					dateBtn.addEventListener("click", changeDate);
-				}
-			}
-			
-			
-			function changeDate(){
-				var val= this.getAttribute("value");										//누른 기간 일 수.
-				var dateObject = new Date();
-				var startDate;																//시작 날짜
-				var endDate;																//끝나는 날짜
-				var year = dateObject.getFullYear();										//연도
-				var month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
-				var date = dateObject.getDate();											//일
-				var dateArr = new Array();
-				
-				//endDate 설정.
-				dateArr = changeDateLength(month,date).split("/");
-				month = dateArr[0];
-				date = dateArr[1];
-				endDate = year+"-"+month+"-"+date;
-				//startDate 설정.				
-				if(val<30){
-					dateObject.setDate(date-val);
-					month = dateObject.getMonth()+1;										//실제 달(+1 처리된 거)
-					date = dateObject.getDate()+1;										//일
-				}else{
-					val = val/30;
-					month = dateObject.getMonth()+1-val;
-					date = dateObject.getDate();										//일
-				}
-				
-				dateArr = changeDateLength(month,date).split("/");
-				month = dateArr[0];										//연도
-				date = dateArr[1];										//실제 달(+1 처리된 거)
-				startDate = year+"-"+month+"-"+date;					
-				
-				document.getElementById("startDate").value = startDate;
-				document.getElementById("endDate").value = endDate;
-			}
-			
-			//달과 일 수 길이가 1자리일 경우 앞에 0을 붙여주는 메서드
-			function changeDateLength(month,date){
-				if(month.toString().length<=1){
-					month = "0"+(month);
-				}
-				if(date.toString().length<=1){
-					date = "0"+(date);
-				}
-				return month+"/"+date;
-			}
-			
-			
-			
-	</script>
 	<!--본문-->
     <main>
         <section id="search_condition">
@@ -175,7 +75,7 @@
 	                </select>
 	                <p>결제방법:</p>
 	                <select name="payment_method">
-	                    <option value="">전체</option>
+	                    <option value="전체">전체</option>
 	                    <option value="카드">카드</option>
 	                    <option value="현금">현금</option>
 	                </select>
@@ -227,7 +127,6 @@
                         <td>0</td>
                         <td>1</td>
                     </tr>
-                     
                 </tbody>
                 <tfoot>
 			        <tr class="sales">
@@ -244,12 +143,8 @@
                         <td>1</td>
 			        </tr>
 			    </tfoot>
-                
             </table>
-        
-
         </section>
     </main>
-
 </body>
 </html>
