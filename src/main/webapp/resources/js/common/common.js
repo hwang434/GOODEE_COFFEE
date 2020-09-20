@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
    printTime();
    setInterval(printTime, 1000);
