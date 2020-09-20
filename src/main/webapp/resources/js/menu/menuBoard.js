@@ -12,6 +12,48 @@ $(document).ready(function(){
        $(this).parent().attr("id", "current");
        $('#' + $(this).attr('title')).fadeIn();
     });
+    
+    $(".menu_sub").click(function() {
+       $(this).parent().siblings(".menu_contents").find(".menuList")
+       .append('<input type="checkbox" class="menuSubChk">');
+    });
+    
+    //메뉴 삭제 체크 시 메뉴 색깔 바뀌는 제이쿼리문
+    $(".menu_label").click(function(){
+       if($(this).next().is(":checked")==false){
+          $(this).next().prop("checked",true);
+          console.log("if문");
+       }else if($(this).next().is(":checked")==true){
+          $(this).next().prop("checked",false);
+          console.log("else문");
+       }      
+       //메뉴 체크 시 배경색 바꿔줌
+       if($(this).next().is(":checked")==true){
+          $(this).css({"backgroundColor":"red", "color":"white"});
+       }else{
+    	   $(this).css({"backgroundColor":"#F1C40F", "color":"black"});
+       }
+       //메뉴 추가 레이어 팝업 제이쿼리
+       $(".menu_add").click(function() {
+           var i = $(this).siblings().eq(0).text();
+           console.log();
+           $("option:contains("+i+")").prop("selected",true);
+           $("#pop").show();
+       });
+    });
+    
+    //선택된 메뉴가 없을 경우
+    $(".menu_sub").click(function(){
+       //alert($("input:checkbox[name=menuID]:checked").length);
+       if($("input:checkbox[name=menuID]:checked").length == 0){
+          alert("선택된 메뉴가 없습니다.");
+          return false;
+       }
+    });
+    //메뉴 추가 팝업 닫기
+    $(".closePop").click(function(){
+        $("#pop").css("display","none");
+    });
 });
 function menuCheck(){
 	var menuName = $("#menuName").val();
