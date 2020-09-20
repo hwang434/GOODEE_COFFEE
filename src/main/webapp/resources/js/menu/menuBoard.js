@@ -1,5 +1,4 @@
 //메뉴 추가 내용 비었을 시 submit 방지
-
 $(document).ready(function(){
 	$("#content div").hide();
     $("#tabs li:first").attr("id", "current");
