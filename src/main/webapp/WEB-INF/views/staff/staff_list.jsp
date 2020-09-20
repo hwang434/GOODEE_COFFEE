@@ -17,9 +17,8 @@
     <script type="text/javascript" src="${path}/resources/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="${path}/resources/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="${path}/resources/js/prefixfree.min.js"></script>
-   <script>
-      $(function(){$(document).attr("title","GOODEE COFFEE | "+$('#title').html());});
-   </script>
+    <script type="text/javascript" src="${path}/resources/js/common/common.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/staff/staff_list.js"></script>
 </head>
 <body>
      <!-- 헤더 -->
@@ -31,22 +30,7 @@
             <p id="login_date">영업일자 :<span>날짜</span></p>
         </div>
     </header>
-   <%@ include file="../gnb_admin.jsp"%>
-   <script type="text/javascript">
-         $(document).ready(function() {
-            printTime();
-            setInterval(printTime, 1000);   
-         });
-         // TODO 보여주는 시간을 서버 시간으로 고칠 것(처음에 한번만 서버 시간을 가져와서 셋팅)
-         function printTime() {
-            var d = new Date();
-            var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일"; 
-            var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초"; 
-            
-            $("#login_date").find("span").html(currentDate+currentTime);
-         }
-         
-   </script>
+    <%@ include file="../gnb_admin.jsp"%>
     <div id="saffList">
         <h1>-직원 리스트-</h1>
         <table border="1">
