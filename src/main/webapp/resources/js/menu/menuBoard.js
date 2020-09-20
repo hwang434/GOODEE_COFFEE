@@ -22,10 +22,8 @@ $(document).ready(function(){
     $(".menu_label").click(function(){
        if($(this).next().is(":checked")==false){
           $(this).next().prop("checked",true);
-          console.log("if문");
        }else if($(this).next().is(":checked")==true){
           $(this).next().prop("checked",false);
-          console.log("else문");
        }      
        //메뉴 체크 시 배경색 바꿔줌
        if($(this).next().is(":checked")==true){
@@ -36,7 +34,6 @@ $(document).ready(function(){
        //메뉴 추가 레이어 팝업 제이쿼리
        $(".menu_add").click(function() {
            var i = $(this).siblings().eq(0).text();
-           console.log();
            $("option:contains("+i+")").prop("selected",true);
            $("#pop").show();
        });
@@ -44,10 +41,11 @@ $(document).ready(function(){
     
     //선택된 메뉴가 없을 경우
     $(".menu_sub").click(function(){
-       //alert($("input:checkbox[name=menuID]:checked").length);
        if($("input:checkbox[name=menuID]:checked").length == 0){
-          alert("선택된 메뉴가 없습니다.");
-          return false;
+           alert("선택된 메뉴가 없습니다.");
+           return false;
+       }else{
+    	   return deleteMenuAlert();
        }
     });
     //메뉴 추가 팝업 닫기
@@ -69,7 +67,6 @@ function menuCheck(){
 	         url: "/gc/menu/menuCheck",
 	         data: {menuName:menuName},
 	         success:function(isMenuExist,textStatus){
-	            console.log(isMenuExist);
 	            if(isMenuExist=="isDuplicated"){
 	               alert("이미 존재하는 메뉴 이름입니다.");
 	            }else{
@@ -82,6 +79,7 @@ function menuCheck(){
 function categoryCheck(){
     var categoryName = $("#categoryInsertText").val();
     var isDuplicated;
+    
     $.ajax({
           type: "POST",
           async: false,
@@ -89,19 +87,18 @@ function categoryCheck(){
           data: {categoryName:categoryName},
           success:function(data,textStatus){
              isDuplicated = data;
-             console.log("ajax data : "+data);
-             console.log("isDuplicated : "+isDuplicated);
           }
       });
     return isDuplicated;
 }
 function categoryInsert(){
    var categoryName = $("#categoryInsertText").val();
+   var isDuplicated = categoryCheck();
+   
    if(categoryName==null || categoryName=="" || categoryName.length>25){
       window.alert("카테고리 제목은 1~25자 이내로 작성해주세요.");
       return false;
    }
-   var isDuplicated = categoryCheck();
    if(isDuplicated=="false"){
       document.categoryInsertFrm.submit();   
       window.alert("카테고리가 추가되었습니다.");
@@ -109,6 +106,13 @@ function categoryInsert(){
       window.alert("이미 존재하는 카테고리 명입니다.");
       return false;
    }
+}
+function deleteMenuAlert(){
+	if(confirm("정말 삭제하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
 }
 
     
