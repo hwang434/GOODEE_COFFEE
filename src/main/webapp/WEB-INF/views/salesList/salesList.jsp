@@ -42,25 +42,10 @@
 	                <button type="button" id="monthBtn" class="dateBtn" value="30">1개월</button>
 	                <button type="button" id="threeMonthBtn" class="dateBtn" value="90">3개월</button>
 	                <button type="button" id="sixMonthBtn" class="dateBtn" value="180">6개월</button>
-	                <select name="months">
-	                    <option selected>월별선택</option>
-	                    <option value="01">01</option>
-	                    <option value="02">02</option>
-	                    <option value="03">03</option>
-	                    <option value="04">04</option>
-	                    <option value="05">05</option>
-	                    <option value="06">06</option>
-	                    <option value="07">07</option>
-	                    <option value="08">08</option>
-	                    <option value="09">09</option>
-	                    <option value="10">10</option>
-	                    <option value="11">11</option>
-	                    <option value="12">12</option>
-	                </select>
 	                <div class="calander">
-	                    <p><input type="date" id="startDate" name="open_time" class="currentDate" min="2000-01-01" max="2100-01-01"/></p>
-	                    <span>~</span>
-	                    <p><input type="date" id="endDate" name="close_time" class="currentDate"  min="2000-01-01" max="2100-01-01"/></p>
+	                    <span><input type="date" id="startDate" name="open_time" class="currentDate" min="2000-01-01" max="2100-01-01"/>
+	                    ~
+	                    <input type="date" id="endDate" name="close_time" class="currentDate"  min="2000-01-01" max="2100-01-01"/></span>
 	                </div>
 	                <script>
 	                    document.getElementsByClassName('currentDate').value = new Date().toISOString().substring(0, 10);
@@ -86,7 +71,7 @@
         <section id="search_list">
             <table>
                 <colgroup>
-                    <col width="5%"><!--번호-->
+                    <col width="8%"><!--번호-->
                     <col width="10%"><!--일자-->
                     <col width="5%"><!--시간-->
                     <col width="20%"><!--구매상품-->

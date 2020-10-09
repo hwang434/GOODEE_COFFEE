@@ -12,7 +12,6 @@ section#search_condition{margin-top: 20px; height: 101px;}
 .option_zone_left select{padding: 3px;font-size: 12px;}
 .option_zone_left .calander{margin-top: 5px;}
 .option_zone_left .calander form, .option_zone_left .calander span{float: left;}
-.option_zone_left .calander span{margin: 5px 5px 0;}
 
 .option_zone_right{ width: 300px; height:100%; float: left; padding: 20px 0 0 0;}
 .option_zone_right select, .option_zone_right p{float: left;padding: 3px;font-size: 15px;}
